@@ -5,6 +5,7 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 # -----------------------------------------------
 ARG SIMPLICITYHL_REPO=https://github.com/BlockstreamResearch/SimplicityHL.git
 ARG HAL_SIMPLICITY_REPO=https://github.com/BlockstreamResearch/hal-simplicity.git
+ARG ELEMENTS_VERSION=23.2.7
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -57,6 +58,15 @@ RUN curl -L https://smplx.simplicity-lang.org | bash && \
 # ----------------
 RUN cargo install simplicityhl-lsp && \
     cp /usr/local/cargo/bin/simplicityhl-lsp /usr/local/bin/
+
+# --------------------------------
+# Install elements-cli and elementsd
+# (x86_64 prebuilt binaries — see .devcontainer/README.md)
+# --------------------------------
+RUN curl -L "https://github.com/ElementsProject/elements/releases/download/elements-${ELEMENTS_VERSION}/elements-${ELEMENTS_VERSION}-x86_64-linux-gnu.tar.gz" \
+    | tar -xz --strip-components=2 -C /usr/local/bin \
+    "elements-${ELEMENTS_VERSION}/bin/elements-cli" \
+    "elements-${ELEMENTS_VERSION}/bin/elementsd"
 
 # Default workspace
 WORKDIR /workspace

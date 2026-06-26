@@ -4,7 +4,8 @@
         "dockerfile": "Dockerfile",
         "args": {
             "SIMPLICITYHL_REPO": "https://github.com/BlockstreamResearch/SimplicityHL.git",
-            "HAL_SIMPLICITY_REPO": "https://github.com/BlockstreamResearch/hal-simplicity.git"
+            "HAL_SIMPLICITY_REPO": "https://github.com/BlockstreamResearch/hal-simplicity.git",
+            "ELEMENTS_VERSION": "23.2.7"
         }
     },
     "customizations": {
